@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" data-theme="light">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Tanjung Homemade Creative — Gas Biz</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <header class="app-header">
-        <h2 style="margin:0;">Gas Biz System</h2>
-        <div style="display: flex; gap: 8px;">
-            <button id="toggleRecordsBtn" class="secondary">Sembunyi Rekod</button>
-            <button id="themeBtn" class="theme-toggle" title="Tukar tema">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <h1 class="app-title">Gas Biz System</h1>
+        <div class="header-actions">
+            <button id="toggleRecordsBtn" class="icon-btn" title="Sembunyi/Tunjuk Rekod">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+            <button id="themeBtn" class="icon-btn" title="Tukar tema">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
         </div>
     </header>
@@ -22,152 +27,166 @@
         <div class="summary-bar" id="summaryBar"></div>
 
         <section id="view-stok" class="view active">
-            <form class="card" id="addStockForm">
-                <h3>Tambah Stok Gas</h3>
-                <div class="form-group"><label for="stDate">Tarikh</label><input type="date" id="stDate"></div>
-                <div class="form-group"><label for="stNote">Nota (cth: Bil Lori)</label><input id="stNote" placeholder="Wajib diisi"></div>
-                <div class="form-group"><label for="stQ14">Jumlah Tong 14KG</label><input type="number" id="stQ14" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="stC14">Harga Modal / Tong 14KG (RM)</label><input type="number" id="stC14" min="0" step="0.01" placeholder="0.00"></div>
-                <div class="form-group"><label for="stQ12">Jumlah Tong 12KG</label><input type="number" id="stQ12" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="stC12">Harga Modal / Tong 12KG (RM)</label><input type="number" id="stC12" min="0" step="0.01" placeholder="0.00"></div>
-                <div class="form-group"><label for="stQI">Jumlah Tong Industri</label><input type="number" id="stQI" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="stCI">Harga Modal / Tong Industri (RM)</label><input type="number" id="stCI" min="0" step="0.01" placeholder="0.00"></div>
-                <button type="button" id="addStock">Tambah Stok</button>
-            </form>
-            <form class="card" id="addExpenseForm">
-                <h3>Tambah Modal Lain</h3>
-                <div class="form-group"><label for="exDate">Tarikh</label><input type="date" id="exDate"></div>
-                <div class="form-group">
-                    <label for="exType">Jenis Modal</label>
-                    <select id="exType"><option>Minyak Lori</option><option>Upah Kilang</option><option>Others</option></select>
-                </div>
-                <div class="form-group"><label for="exAmt">Jumlah (RM)</label><input type="number" id="exAmt" step="0.01" min="0" placeholder="0.00"></div>
-                <div class="form-group"><label for="exNote">Nota</label><input id="exNote"></div>
-                <button type="button" id="addExpense">Tambah Modal</button>
-            </form>
+            <div class="card">
+                <form id="addStockForm">
+                    <h3 class="card-title">Tambah Stok Gas</h3>
+                    <div class="form-group"><label for="stDate">Tarikh</label><input type="date" id="stDate"></div>
+                    <div class="form-group"><label for="stNote">Nota (cth: Bil Lori)</label><input id="stNote" placeholder="Wajib diisi"></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="stQ14">Tong 14KG</label><input type="number" id="stQ14" min="0" placeholder="0"></div>
+                        <div class="form-group"><label for="stC14">Modal /unit</label><input type="number" id="stC14" min="0" step="0.01" placeholder="0.00"></div>
+                        <div class="form-group"><label for="stQ12">Tong 12KG</label><input type="number" id="stQ12" min="0" placeholder="0"></div>
+                        <div class="form-group"><label for="stC12">Modal /unit</label><input type="number" id="stC12" min="0" step="0.01" placeholder="0.00"></div>
+                        <div class="form-group"><label for="stQI">Tong Industri</label><input type="number" id="stQI" min="0" placeholder="0"></div>
+                        <div class="form-group"><label for="stCI">Modal /unit</label><input type="number" id="stCI" min="0" step="0.01" placeholder="0.00"></div>
+                    </div>
+                    <button type="button" id="addStock">Tambah Stok</button>
+                </form>
+            </div>
+            <div class="card">
+                <form id="addExpenseForm">
+                    <h3 class="card-title">Tambah Modal Lain</h3>
+                    <div class="form-group"><label for="exDate">Tarikh</label><input type="date" id="exDate"></div>
+                    <div class="form-group"><label for="exType">Jenis Modal</label><select id="exType"><option>Minyak Lori</option><option>Upah Kilang</option><option>Others</option></select></div>
+                    <div class="form-group"><label for="exAmt">Jumlah (RM)</label><input type="number" id="exAmt" step="0.01" min="0" placeholder="0.00"></div>
+                    <div class="form-group"><label for="exNote">Nota</label><input id="exNote" placeholder="Pilihan"></div>
+                    <button type="button" id="addExpense">Tambah Modal</button>
+                </form>
+            </div>
             <h3 class="record-title">Rekod Stok Gas</h3>
             <div id="stockList" class="record-list"></div>
-            <h3 class="record-title" style="margin-top: 20px;">Rekod Modal Lain</h3>
+            <h3 class="record-title">Rekod Modal Lain</h3>
             <div id="expList" class="record-list"></div>
         </section>
 
         <section id="view-jualan" class="view">
-             <form class="card" id="addSaleForm">
-                <h3>Rekod Jualan Baru</h3>
-                <div class="form-group"><label for="slDate">Tarikh</label><input type="date" id="slDate"></div>
-                <div class="form-group">
-                    <label for="slClient">Pelanggan</label>
-                    <div class="search-container">
-                        <input type="text" id="slClient" placeholder="Cari atau pilih pelanggan..." autocomplete="off">
-                        <div id="client-search-results" class="search-results"></div>
+             <div class="card">
+                <form id="addSaleForm">
+                    <h3 class="card-title">Rekod Jualan Baru</h3>
+                    <div class="form-group"><label for="slDate">Tarikh</label><input type="date" id="slDate"></div>
+                    <div class="form-group">
+                        <label for="slClient">Pelanggan</label>
+                        <div class="search-container"><input type="text" id="slClient" placeholder="Cari atau pilih pelanggan..." autocomplete="off"><div id="client-search-results" class="search-results"></div></div>
                     </div>
-                </div>
-                <div class="form-group"><label for="slQ14">Total Tong 14KG</label><input type="number" id="slQ14" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="slPaid14">Tong Dibayar 14KG</label><input type="number" id="slPaid14" min="0" placeholder="0"></div>
-
-                <details style="margin-bottom: 14px; border: 1px dashed var(--border); border-radius: 8px;">
-                    <summary style="font-size: 0.9rem; color: var(--text-link); cursor: pointer; padding: 10px;">+ Tambah Jualan Tong 12KG / Industri</summary>
-                    <div style="padding: 0 10px 10px 10px; margin-top: 10px;">
-                        <div class="form-group"><label for="slQ12">Total Tong 12KG</label><input type="number" id="slQ12" min="0" placeholder="0"></div>
-                        <div class="form-group"><label for="slPaid12">Tong Dibayar 12KG</label><input type="number" id="slPaid12" min="0" placeholder="0"></div>
-                        <div class="form-group"><label for="slQI">Total Tong Industri</label><input type="number" id="slQI" min="0" placeholder="0"></div>
-                        <div class="form-group"><label for="slPaidI">Tong Dibayar Industri</label><input type="number" id="slPaidI" min="0" placeholder="0"></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="slQ14">Total 14KG</label><input type="number" id="slQ14" min="0" placeholder="0"></div>
+                        <div class="form-group"><label for="slPaid14">Dibayar 14KG</label><input type="number" id="slPaid14" min="0" placeholder="0"></div>
                     </div>
-                </details>
-
-                <div class="form-group"><label for="slPayType">Jenis Pembayaran</label><select id="slPayType"><option>Cash</option><option>Transfer</option><option>Hutang</option></select></div>
-                <div class="form-group"><label for="slRemark">Remark</label><input id="slRemark"></div>
-                <div id="slCalc" class="note" style="background: var(--surface-2); padding: 10px; border-radius: 8px; margin-bottom: 16px;"></div>
-                <button type="button" id="addSale">Tambah Jualan</button>
-             </form>
-             <form class="card" id="payDebtForm">
-                <h3>Bayar Hutang</h3>
-                <div class="form-group">
-                    <label for="debtClient">Pelanggan Berhutang</label>
-                    <div class="search-container">
-                        <input type="text" id="debtClient" placeholder="Cari pelanggan berhutang..." autocomplete="off">
-                        <div id="debt-client-search-results" class="search-results"></div>
+                    <details class="accordion">
+                        <summary class="accordion-header">+ Jualan Tong 12KG / Industri</summary>
+                        <div class="accordion-content">
+                            <div class="form-grid">
+                                <div class="form-group"><label for="slQ12">Total 12KG</label><input type="number" id="slQ12" min="0" placeholder="0"></div>
+                                <div class="form-group"><label for="slPaid12">Dibayar 12KG</label><input type="number" id="slPaid12" min="0" placeholder="0"></div>
+                                <div class="form-group"><label for="slQI">Total Industri</label><input type="number" id="slQI" min="0" placeholder="0"></div>
+                                <div class="form-group"><label for="slPaidI">Dibayar Industri</label><input type="number" id="slPaidI" min="0" placeholder="0"></div>
+                            </div>
+                        </div>
+                    </details>
+                    <div class="form-group"><label for="slPayType">Jenis Pembayaran</label><select id="slPayType"><option>Cash</option><option>Transfer</option><option>Hutang</option></select></div>
+                    <div class="form-group"><label for="slRemark">Remark</label><input id="slRemark" placeholder="Pilihan"></div>
+                    <div id="slCalc" class="calc-summary"></div>
+                    <button type="button" id="addSale">Tambah Jualan</button>
+                 </form>
+             </div>
+             <div class="card">
+                <form id="payDebtForm">
+                    <h3 class="card-title">Bayar Hutang</h3>
+                    <div class="form-group">
+                        <label for="debtClient">Pelanggan Berhutang</label>
+                        <div class="search-container"><input type="text" id="debtClient" placeholder="Cari pelanggan..." autocomplete="off"><div id="debt-client-search-results" class="search-results"></div></div>
                     </div>
-                </div>
-                <div id="debtInfo" class="note" style="background: var(--surface-2); padding: 10px; border-radius: 8px; margin-bottom: 16px;">Pilih pelanggan untuk lihat baki hutang.</div>
-                <div class="form-group"><label for="payQ14">Tong 14KG Dibayar</label><input type="number" id="payQ14" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="payQ12">Tong 12KG Dibayar</label><input type="number" id="payQ12" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="payQI">Tong Industri Dibayar</label><input type="number" id="payQI" min="0" placeholder="0"></div>
-                <div class="form-group"><label for="debtMethod">Kaedah Bayaran</label><select id="debtMethod"><option>Cash</option><option>Transfer</option><option>Other</option></select></div>
-                <div class="form-group"><label for="payNote">Nota</label><input id="payNote"></div>
-                <button type="button" id="btnPayDebt">Sahkan Bayaran</button>
-            </form>
+                    <div id="debtInfo" class="calc-summary">Pilih pelanggan untuk lihat baki hutang.</div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="payQ14">14KG Dibayar</label><input type="number" id="payQ14" min="0" placeholder="0"></div>
+                        <div class="form-group"><label for="payQ12">12KG Dibayar</label><input type="number" id="payQ12" min="0" placeholder="0"></div>
+                        <div class="form-group"><label for="payQI">Industri Dibayar</label><input type="number" id="payQI" min="0" placeholder="0"></div>
+                    </div>
+                    <div class="form-group"><label for="debtMethod">Kaedah Bayaran</label><select id="debtMethod"><option>Cash</option><option>Transfer</option><option>Other</option></select></div>
+                    <div class="form-group"><label for="payNote">Nota</label><input id="payNote" placeholder="Pilihan"></div>
+                    <button type="button" id="btnPayDebt">Sahkan Bayaran</button>
+                </form>
+            </div>
             <h3 class="record-title">Rekod Jualan</h3>
             <div id="salesList" class="record-list"></div>
         </section>
 
         <section id="view-admin" class="view">
-            <div id="adminLogin" class="card">
-                <h3>Log Masuk Admin</h3>
-                <div class="form-group" style="display:flex; align-items:flex-end; gap:8px;">
-                    <div style="flex:1;"><label for="adminPIN">PIN Admin</label><input id="adminPIN" type="password" placeholder="****"></div>
-                    <button id="btnAdminLogin" style="width: auto; padding: 12px 20px;">Masuk</button>
-                </div>
+            <div id="adminLogin" class="card" style="margin-top: 20px;">
+                <h3 class="card-title">Log Masuk Admin</h3>
+                <div class="form-group"><label for="adminPIN">PIN Admin</label><input id="adminPIN" type="password" placeholder="****"></div>
+                <button id="btnAdminLogin">Masuk</button>
                 <p class="note">PIN Lalai: <b>boss123</b>.</p>
             </div>
             <div id="adminArea" style="display: none;">
-                <form class="card" id="addClientForm">
-                    <h3>Urus Pelanggan</h3>
-                    <div class="form-group"><label for="clName">Nama</label><input id="clName"></div>
-                    <div class="form-group"><label for="clCat">Kategori</label><input id="clCat" placeholder="cth: Peruncit, Kedai Makan"></div>
-                    <div class="form-group"><label for="clP14">Harga Jual 14KG (RM)</label><input type="number" id="clP14" step="0.01" min="0" placeholder="0.00"></div>
-                    <div class="form-group"><label for="clP12">Harga Jual 12KG (RM)</label><input type="number" id="clP12" step="0.01" min="0" placeholder="0.00"></div>
-                    <div class="form-group"><label for="clPI">Harga Jual Industri (RM)</label><input type="number" id="clPI" step="0.01" min="0" placeholder="0.00"></div>
-                    <button type="button" id="addClient">Tambah Pelanggan</button>
-                    <details style="margin-top: 20px;">
-                        <summary style="font-weight: 500; cursor:pointer;">Lihat Senarai Pelanggan</summary>
-                        <div class="table-wrap" style="margin-top: 10px;"><table id="clientTable"><thead><tr><th>Nama</th><th>Kategori</th><th>Harga 14/12/I</th><th>Hutang (RM)</th><th>Aksi</th></tr></thead><tbody></tbody></table></div>
-                    </details>
-                </form>
                 <div class="card">
-                    <h3>Sejarah Pembayaran Hutang</h3>
-                    <div class="table-wrap"><table id="payTable"><thead><tr><th>Tarikh</th><th>Pelanggan</th><th>Jumlah (RM)</th><th>Kaedah</th><th>Nota</th></tr></thead><tbody></tbody></table></div>
+                    <form id="addClientForm">
+                        <h3 class="card-title">Urus Pelanggan</h3>
+                        <div class="form-group"><label for="clName">Nama</label><input id="clName" placeholder="Nama Penuh"></div>
+                        <div class="form-group"><label for="clCat">Kategori</label><input id="clCat" placeholder="cth: Peruncit, Kedai Makan"></div>
+                        <div class="form-grid">
+                            <div class="form-group"><label for="clP14">Harga 14KG</label><input type="number" id="clP14" step="0.01" min="0" placeholder="0.00"></div>
+                            <div class="form-group"><label for="clP12">Harga 12KG</label><input type="number" id="clP12" step="0.01" min="0" placeholder="0.00"></div>
+                            <div class="form-group"><label for="clPI">Harga Industri</label><input type="number" id="clPI" step="0.01" min="0" placeholder="0.00"></div>
+                        </div>
+                        <button type="button" id="addClient">Tambah Pelanggan</button>
+                    </form>
+                    <details class="accordion" style="margin-top: 20px;">
+                        <summary class="accordion-header">Lihat Senarai Pelanggan</summary>
+                        <div class="accordion-content">
+                            <div class="table-wrap"><table id="clientTable"><thead><tr><th>Nama</th><th>Kategori</th><th>Harga 14/12/I</th><th>Hutang</th><th>Aksi</th></tr></thead><tbody></tbody></table></div>
+                        </div>
+                    </details>
                 </div>
-                <form class="card" id="addPayrollForm">
-                    <h3>Rekod Gaji Pekerja</h3>
-                    <div class="form-group"><label for="pgDate">Tarikh</label><input type="date" id="pgDate"></div>
-                    <div class="form-group"><label for="pgName">Nama Pekerja</label><input id="pgName"></div>
-                    <div class="form-group"><label for="pgAmt">Jumlah (RM)</label><input type="number" id="pgAmt" step="0.01" min="0" placeholder="0.00"></div>
-                    <div class="form-group"><label for="pgNote">Nota</label><input id="pgNote"></div>
-                    <button type="button" id="addPayroll">Tambah Gaji</button>
-                    <details style="margin-top: 20px;">
-                        <summary style="font-weight: 500; cursor:pointer;">Lihat Sejarah Gaji</summary>
-                        <div class="table-wrap" style="margin-top: 10px;"><table id="payrollTable"><thead><tr><th>Tarikh</th><th>Nama</th><th>Jumlah</th><th>Nota</th><th>Aksi</th></tr></thead><tbody></tbody></table></div>
-                    </details>
-                </form>
                 <div class="card">
-                    <h3>Ringkasan & Laporan</h3>
-                    <div id="reportKPI" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;"></div>
+                    <h3 class="card-title">Sejarah Pembayaran Hutang</h3>
+                    <div class="table-wrap"><table id="payTable"><thead><tr><th>Tarikh</th><th>Pelanggan</th><th>Jumlah</th><th>Kaedah</th><th>Nota</th></tr></thead><tbody></tbody></table></div>
+                </div>
+                <div class="card">
+                    <form id="addPayrollForm">
+                        <h3 class="card-title">Rekod Gaji Pekerja</h3>
+                        <div class="form-group"><label for="pgDate">Tarikh</label><input type="date" id="pgDate"></div>
+                        <div class="form-grid">
+                            <div class="form-group"><label for="pgName">Nama Pekerja</label><input id="pgName" placeholder="Nama Penuh"></div>
+                            <div class="form-group"><label for="pgAmt">Jumlah (RM)</label><input type="number" id="pgAmt" step="0.01" min="0" placeholder="0.00"></div>
+                        </div>
+                        <div class="form-group"><label for="pgNote">Nota</label><input id="pgNote" placeholder="Pilihan"></div>
+                        <button type="button" id="addPayroll">Tambah Gaji</button>
+                    </form>
+                     <details class="accordion" style="margin-top: 20px;">
+                        <summary class="accordion-header">Lihat Sejarah Gaji</summary>
+                        <div class="accordion-content">
+                            <div class="table-wrap"><table id="payrollTable"><thead><tr><th>Tarikh</th><th>Nama</th><th>Jumlah</th><th>Nota</th><th>Aksi</th></tr></thead><tbody></tbody></table></div>
+                        </div>
+                    </details>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Ringkasan & Laporan</h3>
+                    <div id="reportKPI" class="report-grid"></div>
                     <div class="divider"></div>
                     <p class="note">Eksport data dalam format CSV untuk simpanan atau analisa lanjut.</p>
-                    <div class="btn-row" style="margin-top: 10px; display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                    <div class="btn-grid">
                         <button type="button" id="exportSalesCsv" class="secondary">Jualan</button>
                         <button type="button" id="exportStocksCsv" class="secondary">Stok</button>
                         <button type="button" id="exportExpensesCsv" class="secondary">Belanja</button>
                     </div>
                 </div>
                 <div class="card">
-                    <h3>Tetapan & Data</h3>
+                    <h3 class="card-title">Tetapan & Data</h3>
                     <div class="form-group">
                         <label for="setPIN">Tukar PIN Admin</label>
-                        <div style="display:flex; gap: 8px;">
-                            <input id="setPIN" placeholder="PIN baru">
-                            <button type="button" id="savePIN" style="width: auto;">Simpan</button>
+                        <div class="input-group">
+                            <input id="setPIN" placeholder="PIN baru"><button type="button" id="savePIN">Simpan</button>
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <label style="font-weight: 600; color: var(--warn);">Operasi Data</label>
-                    <p class="note">Hanya reset kiraan pada kad "Sold" di laman utama kepada 0. Data jualan tidak akan dipadam.</p>
-                    <button type="button" id="resetCounterBtn" class="secondary" style="margin-top: 8px;">Reset Kiraan "Sold" Sahaja</button>
+                    <label class="setting-label">Operasi Data</label>
+                    <p class="note">Reset kiraan "Sold" di laman utama kepada 0. Data jualan tidak akan dipadam.</p>
+                    <button type="button" id="resetCounterBtn" class="secondary" style="margin-top: 8px;">Reset Kiraan "Sold"</button>
                     <div class="divider"></div>
-                    <label style="font-weight: 600; color: var(--danger);">Zon Bahaya</label>
-                    <p class="note">Tindakan di bawah akan memadam data secara kekal dan tidak boleh diundur.</p>
-                    <button type="button" id="resetAllSalesBtn" class="danger" style="margin-top: 8px;">Padam Semua Data Jualan</button>
+                    <label class="setting-label danger">Zon Bahaya</label>
+                    <p class="note">Tindakan di bawah akan memadam data secara kekal.</p>
+                    <button type="button" id="resetAllSalesBtn" class="danger-outline" style="margin-top: 8px;">Padam Semua Data Jualan</button>
                     <button type="button" id="deleteAllDataBtn" class="danger" style="margin-top: 8px;">PADAM SEMUA DATA SISTEM</button>
                 </div>
             </div>
@@ -188,6 +207,7 @@
             <span>Admin</span>
         </button>
     </nav>
+    
     <div class="print-container"></div>
     <script src="script.js"></script>
 </body>
