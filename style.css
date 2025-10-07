@@ -78,7 +78,8 @@ h3 { font-size: 1.1rem; }
     box-shadow: var(--shadow-light);
 }
 .kpi h4 { margin: 0; font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-.kpi .v { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); }
+.kpi .v { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+[data-theme="light"] .kpi .v { color: var(--text-primary); }
 
 .card {
     background: var(--surface);
@@ -170,12 +171,6 @@ button.ghost:hover { background: var(--surface-2); transform: none; }
     margin-top: 6px; max-height: 220px; overflow-y: auto;
     z-index: 1000; box-shadow: var(--shadow);
 }
-.search-results-item {
-    padding: 14px; cursor: pointer;
-    color: var(--text-primary);
-    border-bottom: 1px solid var(--border);
-}
-.search-results-item:last-child { border-bottom: none; }
 .search-results-item:hover, .search-results-item.active { background-color: var(--primary); color: var(--primary-text); }
 [data-theme="light"] .search-results-item:hover, [data-theme="light"] .search-results-item.active { color: white; }
 
